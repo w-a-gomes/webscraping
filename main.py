@@ -22,21 +22,39 @@ class WebScraping(object):
         self.__configs = self.__load_configs()
 
     @property
-    def configs(self):
+    def config_dirname(self) -> str:
+        """"""
+        return self.__config_dirname
+
+    @property
+    def config_filename(self) -> str:
+        """"""
+        return self.__config_filename
+
+    @property
+    def config_path(self) -> str:
+        """"""
+        return self.__config_path
+
+    @property
+    def configs(self) -> dict:
+        """"""
         return self.__configs
 
     def __load_configs(self) -> dict:
         #
-        if os.path.isfile(self.__config_path)
+        if os.path.isfile(self.__config_path):
             with open(self.__config_path, 'r') as json_file:
                 return json.load(json_file)
         return {}
 
     def __save_configs(self, data: dict) -> None:
         #
-        if os.path.isfile(self.__config_path)
-            with open(self.__config_path, 'w') as json_file:
-                json.dump(data, json_file)
+        if not os.path.exists(self.__config_dirname):
+            os.makedirs(self.__config_dirname)
+
+        with open(self.__config_path, 'w') as json_file:
+            json.dump(data, json_file)
 
 
 if __name__ == '__main__':

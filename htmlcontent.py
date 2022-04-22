@@ -15,9 +15,12 @@ from selenium.common.exceptions import TimeoutException
 
 
 class HtmlContent(object):
-    """"""
+    """HTML content of a webpage
+    
+    Retrieves the HTML content of a web page using a webdriver (selenium)
+    """
     def __init__(self) -> None:
-        """"""
+        """HtmlContent Constructor"""
         self.__driver = self.__driver_config()
         self.__html_content = None
         self.__html_content_is_setting = False
