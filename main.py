@@ -1,14 +1,45 @@
 #!/usr/bin env python3
+import json
 import logging
-from typing import Optional, Union
+import os
 
-from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
+from selenium.webdriver.common.by import By
 
 import htmlcontent
 
+class WebScraping(object):
+    """"""
+    def __init__(self):
+        """"""
+        self.__config_dirname = 'webscraping_art'
+        self.__config_filename = 'webscraping_art.json'
+        self.__config_path = os.path.join(
+            os.environ["HOME"], '.config',
+            self.__config_dirname,
+            self.__config_filename,
+        )
+        self.__configs = self.__load_configs()
 
-def main():
+    @property
+    def configs(self):
+        return self.__configs
+
+    def __load_configs(self) -> dict:
+        #
+        if os.path.isfile(self.__config_path)
+            with open(self.__config_path, 'r') as json_file:
+                return json.load(json_file)
+        return {}
+
+    def __save_configs(self, data: dict) -> None:
+        #
+        if os.path.isfile(self.__config_path)
+            with open(self.__config_path, 'w') as json_file:
+                json.dump(data, json_file)
+
+
+if __name__ == '__main__':
     html = htmlcontent.HtmlContent()
     html.html_content_settings(
         url='https://www.python.org/',
@@ -17,14 +48,9 @@ def main():
     )
     soup = BeautifulSoup(html.html_content, 'html.parser')
     print(soup.text)
-
     """
     soup = BeautifulSoup(html.html_content, 'html.parser')
     for link in soup.find_all('a'):
         if 'likes' in link.text.lower():
             print(link.text[len('likes('): -1])
     """
-
-
-if __name__ == '__main__':
-    main()
